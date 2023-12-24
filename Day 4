@@ -1,0 +1,36 @@
+
+from typing import List
+
+class Solution:
+
+    def buyMaximumProducts(self, n : int, k : int, price : List[int]) -> int:
+
+        new = []
+
+        for i,j in enumerate(price):
+
+            new.append([i+1,j])
+
+        new.sort(key = lambda x: x[1],reverse = 0)
+
+        count = 0
+
+        cost = 0
+
+        for i in range(n):
+
+            if cost + new[i][0]*new[i][1] <= k:
+
+                count += new[i][0]
+
+                cost += new[i][0]*new[i][1]
+
+            else:
+
+                rem = (k-cost)//(new[i][1])
+
+                count += rem
+
+                break
+
+        return count
